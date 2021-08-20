@@ -4,7 +4,7 @@
     <ng-template mat-tab-label>
       <label class="tab1"><img src="assets\images\primary-logo.png"> Primary</label>
     </ng-template>
-    <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of primary; let i=index">
+    <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of primary| filter: filterTerm; let i=index">
       <mat-checkbox class="example-margin" style="flex: 0;"></mat-checkbox>
       <div class="cont" [routerLink]="[i]" >
         <span class="content1">{{data.companyName}}</span>
@@ -18,7 +18,7 @@
   <ng-template mat-tab-label>
     <label class="tab1"><img src="assets\images\social-icon.png"> Social</label>
   </ng-template>
-  <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of social; let i =index">
+  <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of social| filter: filterTerm; let i =index">
     <mat-checkbox class="example-margin" style="flex: 0;"></mat-checkbox>
     <div class="cont" [routerLink]="[i]">
       <span class="content1">{{data.companyName}}</span>
@@ -32,7 +32,7 @@
   <ng-template mat-tab-label>
     <label class="tab1"><img src="assets\images\promotions-logo.png"> Promotion</label>
   </ng-template>
-  <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of promotion; let i=index">
+  <mat-card class="details-container" style="cursor: pointer;" *ngFor="let data of promotion| filter: filterTerm; let i=index">
     <mat-checkbox class="example-margin" style="flex: 0;"></mat-checkbox>
     <div class="cont" [routerLink]="[i]" >
       <span class="content1">{{data.companyName}}</span>

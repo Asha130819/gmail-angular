@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { User } from "./user.model";
 
@@ -14,7 +14,7 @@ export interface AuthResponseData{
 }
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
-    user = new Subject<User>();
+    public user:BehaviorSubject<User> = new BehaviorSubject<User>(<any>null);
 
     constructor(private http: HttpClient){}
 
@@ -43,7 +43,11 @@ export class DataStorageService {
     private handleAuthentication(email: string, userId: string, token: string, expiresIn: number){
         const expirationDate = new Date(new Date().getTime() + expiresIn*1000);
         const user = new User(email, userId, token, expirationDate);
-        this.user.next(user);
+        if(user){
+            this.user.next(user);
+            console.log(this.user);
+            localStorage.setItem("userData", JSON.stringify(user));
+        }
     }
 
     private handleError(errorRes: HttpErrorResponse){
@@ -65,5 +69,23 @@ export class DataStorageService {
                 break;
         }
         return throwError(errorMessage);
+    }
+
+    autolLogin(){
+        const userData = localStorage.getItem('userData');
+        if(!userData){
+            return;
+        }
+        const user: {
+            email: string;
+            id: string;
+            _token: string;
+            _tokenExpirationDate: string
+        }  = JSON.parse(userData);
+        const loadedUser = new User(user.email, user.id, user._token, new Date(user._tokenExpirationDate));
+        if(loadedUser.token){
+            this.user.next(loadedUser);
+        }
+        
     }
 }

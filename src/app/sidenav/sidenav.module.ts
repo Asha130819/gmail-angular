@@ -9,6 +9,7 @@ import { SidenavTemplateComponent } from "./sidenav-details/sidenav-template/sid
 import { SidenavComponent } from "./sidenav.component";
 import { StarredComponent } from "./starred/starred.component";
 import { ComposeDialogComponent } from './compose-dialog/compose-dialog.component';
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 @NgModule({
     declarations: [
@@ -19,7 +20,9 @@ import { ComposeDialogComponent } from './compose-dialog/compose-dialog.componen
         ComposeDialogComponent,
     ],
     // entryComponents: [ComposeDialogComponent],
-    imports: [CommonModule, ReactiveFormsModule,MaterialModule,AppRoutingModule]
+
+    imports: [CommonModule, ReactiveFormsModule,MaterialModule,AppRoutingModule, Ng2SearchPipeModule]
+
 })
 export class sidenavModule{
 

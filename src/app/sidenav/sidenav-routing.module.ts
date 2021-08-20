@@ -7,7 +7,7 @@ import { StarredComponent } from "./starred/starred.component";
 
 const sidenavRoutes: Routes = [
     {path: "", component: SidenavComponent, children: [
-        {path: '', component: SidenavDetailsComponent},
+        {path: "", component: SidenavDetailsComponent},
         {path: ":name/re", component: StarredComponent},
         {path: ":id", component: SidenavTemplateComponent}
     ]},
@@ -18,6 +18,4 @@ const sidenavRoutes: Routes = [
         RouterModule
     ]
 })
-export class SidenavRouting {
-
-}
+export class SidenavRouting {}

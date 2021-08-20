@@ -8,7 +8,7 @@
   
   <mat-form-field floatLabel="never" appearance="outline" class="matt">
     <mat-icon class="search-icon" matPrefix>search</mat-icon>
-    <input type="text" matInput [formControl]="myControl" placeholder="Search mail" class="search-box">
+    <input type="text" matInput [formControl]="myControl" placeholder="Search mail" class="search-box" (input)="checkKey($event)">
     <mat-icon class="filter-icon" matSuffix>filter_list</mat-icon>
   </mat-form-field>
 
@@ -17,7 +17,7 @@
   <div fxLayout="row">
 
     <mat-icon [matMenuTriggerFor]="supportMenu" matTooltip="support" class="side-icons" fxhide.lt.md>help_outline</mat-icon>
-    <mat-menu #supportMenu="matMenu">
+    <mat-menu #supportMenu="matMenu" yPosition="below"> 
       <div mat-menu-item>Help</div>
       <div mat-menu-item>Training</div>
       <div mat-menu-item>Updates</div>
@@ -25,20 +25,23 @@
 
 
     <mat-icon [matMenuTriggerFor]="settingMenu" matTooltip="settings" class="side-icons" fxhide.lt.md>settings</mat-icon>
-    <mat-menu #settingMenu>
+    <mat-menu #settingMenu yPosition="below">
       <div>Quick settings</div>
       <button mat-button color="primary">See all settings</button>
     </mat-menu>
 
     <mat-icon matTooltip="Google Maps" class="side-icons">apps</mat-icon>
 
-    <mat-icon [matMenuTriggerFor]="logoutMenu" matTooltip="Google account"class="side-icons" fxhide.lt.md>account_circle </mat-icon>
-    <mat-menu #logoutMenu="matMenu">
-
+    <!-- <mat-icon class="side-icons" fxhide.lt.md>account_circle </mat-icon> -->
+    <div mat-card-avatar [matMenuTriggerFor]="logoutMenu" matTooltip="Google account" class="profile-pic"></div>
+    <mat-menu #logoutMenu="matMenu" yPosition="below">
       <mat-card>
-        <mat-icon>account_box</mat-icon>
+        <div mat-card-avatar class="profile-pic"></div>
+        <h2 >{{mail}}</h2>
+        <mat-icon>add_circle_outline</mat-icon>
         Add another account
       </mat-card>
+      
       <button mat-raised-button color="primary" style="margin-top: 10px;" routerLink="/">Logout</button>
     </mat-menu>
 
@@ -51,7 +54,7 @@
     <mat-sidenav #sidenav role="navigation" opened=true mode="side" class="mat-elevation-z8">
 
       <mat-nav-list>
-        <button class="compose" (click)="openCompose()" ><img src="assets\images\compose-logo.png" class="compose-logo"> Compose</button>
+        <button  mat-stroked-button class="compose" (click)="openCompose()" ><img src="assets\images\compose-logo.png" class="compose-logo"> Compose</button>
 
         <button mat-button class="menu-button" routerLink="/home">
             <mat-icon>inbox</mat-icon>

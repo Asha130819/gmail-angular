@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SidenavComponent } from '../sidenav.component';
 import { SidenavService } from '../sidenav.service';
 
 @Component({
@@ -11,8 +12,18 @@ export class SidenavDetailsComponent implements OnInit {
   primary = this.sidenavService.primary;
   social = this.sidenavService.social;
   promotion = this.sidenavService.promotion;
+  filterTerm!: string;
+  filterCheck = this.sidenav.key.subscribe(data => {
+    this.filterTerm = data;
+    console.log(this.filterTerm);
+  })
 
-  constructor(private sidenavService: SidenavService, private router: Router){}
+  constructor(
+    private sidenavService: SidenavService,
+    private router: Router,
+    private sidenavComponent: SidenavComponent,
+    private sidenav: SidenavService
+  ) {}
 
   ngOnInit(): void {
   }

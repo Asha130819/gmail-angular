@@ -1,9 +1,11 @@
 import { Injectable, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { CardContent } from "./sidenav.model";
 
 
 @Injectable({providedIn: "root"})
 export class SidenavService{
+  key= new BehaviorSubject<string>(<any>null);
 
   public primary: CardContent[] = [
     new CardContent('95,2,6, 03:24:00',"Javascript new courses available now!",'Udemy'),
@@ -36,4 +38,7 @@ export class SidenavService{
     new CardContent('june 09, 2020, 18:35:20',"Ready for the safest trip ever? Book now 👆",'redBus'),
   ]
 
+  getKey(data: string){
+    this.key.next(data);
+  }
 }
